@@ -1,0 +1,27 @@
+<div>
+    <a href="https://youtu.be/gwGG0nOZvEw" target="_blank" rel="noopener noreferrer">Node video reference</a>
+    <p>
+      <a href="https://youtu.be/66T2A2dvplY" target="_blank" rel="noopener noreferrer">angular video reference</a>
+    </p>
+    <h4>Open same url in two tabs and start chating.</h4>
+    <h3><strong>Note:</strong> This module is using a node js application named "chat". run the "chat" project first then this chat system will work.</h3>
+  </div>
+  
+  <div>
+    <img src="{{imgUrl}}" alt="">
+  </div>
+
+
+
+<div>
+    <input type="file"  (change)="onFileChanged($event)" />
+    <input type="text" #msgVal />
+    <button type="button" (click)="SendMessage(msgVal.value)">Send Message</button>
+    
+  </div>
+  
+  
+  
+  <div id="main" class="main">
+    <!-- <ul id="'message-list"></ul> -->
+  </div>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+
+
+
+</head>
+<body>
+
+<div>
+    <input type="text" id="username"> &nbsp;&nbsp; <input type="text" id="message"> &nbsp;&nbsp; <button type="button" id="btn" onclick="sendData()">Send</button>
+</div>
+
+<div>
+    <p id="paragraph"></p>
+</div>
+
+
+
+<script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+    
+<script>
+    var msg = "";
+    const socket = io();
+
+
+    let username = document.getElementById("username")
+    let message= document.getElementById("message")
+
+    function sendData(){
+        socket.emit('chat-message',{
+            username:username.value,
+            message:message.value
+        })
+
+        console.log("clicked")
+    }
+
+    socket.on('chat-message',function(data){
+        document.getElementById("paragraph").textContent = data.message
+        console.log(data)
+    })
+
+</script>
+
+<div>
+    <input type="button" onclick="chooseFromDropbox()" value="Choose from Dropbox"/>
+</div>
+
+<div><img src="" id="abc" /></div>
+
+<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="pilqi6fx3rci02g"></script>
+
+ <script type="text/javascript">
+
+function chooseFromDropbox(){
+                //Trigger dropbox chooser
+                Dropbox.choose({
+                    success: function(files) {
+                        //files is list of selected files (array)
+                        if(files.length < 0){
+                            return;
+                        }
+                        var file = files[0];
+                        // alert("Download Link : "+ file.link +"\nFile Name : "+ file.name);
+                        document.getElementById("abc").src = file.link
+                        //Sent link to server and grab content in server side
+                    },
+                    cancel: function() {
+                        //here is code when user close chooser
+                    },
+                    linkType: "direct", //Direct = Download link
+                    multiselect: false, //Allow to select one file
+                 
+                    folderselect: false, //Not allow to select folder
+                    sizeLimit: 1024 * 1024 * 2 //File size limit (2MB)
+                });
+            }
+
+ </script>
+
+</body>
+</html>
+
+
